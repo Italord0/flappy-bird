@@ -11,6 +11,7 @@ This is a clone of the popular game Flappy Bird, implemented in Java using the [
 - [Features](#features)
 - [Installation](#installation)
 - [Usage](#usage)
+- [Building](#building)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -44,6 +45,10 @@ To install and play the Flappy Bird Clone on your Android device, follow these s
 2. Tap the screen to make the bird flap and avoid obstacles.
 
 <!--3. Try to achieve the highest score possible by navigating through the pipes. -->
+
+## Building
+
+In order to compile and run the project, you need [Android Studio](https://developer.android.com/studio).
 
 ## Contributing
 
