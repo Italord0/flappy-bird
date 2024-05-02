@@ -5,9 +5,9 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 
 public class Bird {
-    private static final int GRAVITY = -20;
+    private static final int GRAVITY = -15;
     private static final int SPEED = 100;
-    private static final int JUMP_FORCE = 400;
+    private static final int JUMP_FORCE = 300;
     private final Vector3 position;
     private final Vector3 velocity;
     private final Rectangle collider;
@@ -45,7 +45,11 @@ public class Bird {
         velocity.y = JUMP_FORCE;
     }
 
-    public Rectangle getCollider(){
+    public Rectangle getCollider() {
         return collider;
+    }
+
+    public void dispose() {
+        birdTexture.dispose();
     }
 }

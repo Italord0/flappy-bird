@@ -6,7 +6,7 @@ import java.util.Stack;
 
 public class GameStateManager {
 
-    private Stack<State> states;
+    private final Stack<State> states;
 
     public GameStateManager() {
         states = new Stack<>();
@@ -17,11 +17,11 @@ public class GameStateManager {
     }
 
     public void pop() {
-        states.pop();
+        states.pop().dispose();
     }
 
     public void set(State state) {
-        states.pop();
+        states.pop().dispose();
         states.push(state);
     }
 

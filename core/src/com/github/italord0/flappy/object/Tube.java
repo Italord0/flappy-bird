@@ -57,4 +57,9 @@ public class Tube {
     public boolean collides(Rectangle birdCollider) {
         return birdCollider.overlaps(colliderTop) || birdCollider.overlaps(colliderBot);
     }
+
+    public void dispose() {
+        topTube.dispose();
+        bottomTube.dispose();
+    }
 }
