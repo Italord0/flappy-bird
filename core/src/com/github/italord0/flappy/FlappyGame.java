@@ -2,6 +2,7 @@ package com.github.italord0.flappy;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -16,12 +17,19 @@ public class FlappyGame extends ApplicationAdapter {
     public static final String title = "Flappy Bird";
     private GameStateManager gameStateManager;
     private SpriteBatch spriteBatch;
+
+    private Music music;
+
     @Override
     public void create() {
         spriteBatch = new SpriteBatch();
         gameStateManager = new GameStateManager();
         ScreenUtils.clear(0.1f, 0.1f, 0.1f, 1);
         gameStateManager.push(new MenuState(gameStateManager));
+        music = Gdx.audio.newMusic(Gdx.files.internal("music.mp3"));
+        music.setLooping(true);
+        music.setVolume(0.1f);
+        music.play();
     }
 
     @Override
@@ -34,5 +42,6 @@ public class FlappyGame extends ApplicationAdapter {
     @Override
     public void dispose() {
         spriteBatch.dispose();
+        music.dispose();
     }
 }

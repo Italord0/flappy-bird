@@ -12,13 +12,14 @@ public class MenuState extends State {
 
     public MenuState(GameStateManager gameStateManager) {
         super(gameStateManager);
+        camera.setToOrtho(false, FlappyGame.WIDTH / 2f, FlappyGame.HEIGHT / 2f);
         background = new Texture("bg.png");
         playButton = new Texture("playbtn.png");
     }
 
     @Override
     protected void handleInput() {
-        if (Gdx.input.justTouched()){
+        if (Gdx.input.justTouched()) {
             gameStateManager.set(new PlayState(gameStateManager));
         }
     }
@@ -30,9 +31,10 @@ public class MenuState extends State {
 
     @Override
     public void render(SpriteBatch spriteBatch) {
+        spriteBatch.setProjectionMatrix(camera.combined);
         spriteBatch.begin();
-        spriteBatch.draw(background, 0, 0, FlappyGame.WIDTH, FlappyGame.HEIGHT);
-        spriteBatch.draw(playButton, (FlappyGame.WIDTH / 2f) - (playButton.getWidth() / 2f), FlappyGame.HEIGHT / 2f);
+        spriteBatch.draw(background, 0, 0);
+        spriteBatch.draw(playButton, (camera.position.x ) - (playButton.getWidth() / 2f), camera.position.y);
         spriteBatch.end();
     }
 

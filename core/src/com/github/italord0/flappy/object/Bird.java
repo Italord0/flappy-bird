@@ -1,8 +1,12 @@
 package com.github.italord0.flappy.object;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
+import com.github.italord0.flappy.animation.Animation;
 
 public class Bird {
     private static final int GRAVITY = -15;
@@ -11,24 +15,30 @@ public class Bird {
     private final Vector3 position;
     private final Vector3 velocity;
     private final Rectangle collider;
-    private final Texture birdTexture;
+
+    private final Animation birdAnimation;
+    private final Texture texture;
+    private Sound flapSound;
 
     public Vector3 getPosition() {
         return position;
     }
 
-    public Texture getTexture() {
-        return birdTexture;
+    public TextureRegion getTexture() {
+        return birdAnimation.getFrame();
     }
 
     public Bird(int x, int y) {
         position = new Vector3(x, y, 0);
         velocity = new Vector3(0, 0, 0);
-        birdTexture = new Texture("bird.png");
-        collider = new Rectangle(x, y, birdTexture.getWidth(), birdTexture.getHeight());
+        texture = new Texture("birdanimation.png");
+        birdAnimation = new Animation(new TextureRegion(texture), 3, 0.5f);
+        collider = new Rectangle(x, y, texture.getWidth() / 3f, texture.getHeight());
+        flapSound = Gdx.audio.newSound(Gdx.files.internal("sfx_wing.ogg"));
     }
 
     public void update(float dt) {
+        birdAnimation.update(dt);
         if (position.y > 0) {
             velocity.add(0, GRAVITY, 0);
         }
@@ -43,6 +53,7 @@ public class Bird {
 
     public void jump() {
         velocity.y = JUMP_FORCE;
+        flapSound.play(0.5f);
     }
 
     public Rectangle getCollider() {
@@ -50,6 +61,7 @@ public class Bird {
     }
 
     public void dispose() {
-        birdTexture.dispose();
+        texture.dispose();
+        flapSound.dispose();
     }
 }
